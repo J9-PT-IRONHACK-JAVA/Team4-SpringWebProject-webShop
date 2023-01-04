@@ -28,6 +28,7 @@ public class SecurityConfig {
         return http
                 .csrf().disable()
                 .authorizeHttpRequests()
+                //TODO: Todas las rutas y la autorizacion segun el tipo de USUARIO
                 //.requestMatchers("/public").permitAll()
                 //.requestMatchers(HttpMethod.GET,"/quotes").permitAll()
                 //.requestMatchers(HttpMethod.POST,"/quotes").hasRole("USER")
