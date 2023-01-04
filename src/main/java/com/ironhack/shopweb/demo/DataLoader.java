@@ -1,6 +1,7 @@
 package com.ironhack.shopweb.demo;
 
 
+import com.ironhack.shopweb.model.Seller;
 import com.ironhack.shopweb.model.User;
 import com.ironhack.shopweb.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -32,7 +33,9 @@ public class DataLoader {
         userRepository.save(user1);
 
 
-        var user2 = new User("user",passwordEncoder.encode("user"),"ROLE_USER");
+        var user2 = new Seller("seller", passwordEncoder.encode("seller"),
+                "ROLE_SELLER","COMPANY NAME","Carrer dels Filadors 22 Barcelona",
+                "mail@mail.com","+3423234234");
         userRepository.save(user2);
 
 

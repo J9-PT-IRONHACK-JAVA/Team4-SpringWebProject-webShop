@@ -28,9 +28,10 @@ public class SecurityConfig {
         return http
                 .csrf().disable()
                 .authorizeHttpRequests()
+                //TODO: Todas las rutas y la autorizacion segun el tipo de USUARIO
                 //.requestMatchers("/public").permitAll()
                 //.requestMatchers(HttpMethod.GET,"/quotes").permitAll()
-                //.requestMatchers(HttpMethod.POST,"/quotes").hasRole("USER")
+                .requestMatchers(HttpMethod.POST,"/seller").hasRole("SELLER")
                 //.requestMatchers(HttpMethod.DELETE,"/quotes/**").hasRole("ADMIN")
                 //.requestMatchers(HttpMethod.PATCH,"/quotes/**").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.POST,"/users").hasRole("ADMIN")
