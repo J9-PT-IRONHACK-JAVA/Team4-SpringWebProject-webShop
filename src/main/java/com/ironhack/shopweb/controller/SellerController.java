@@ -20,7 +20,7 @@ public class SellerController {
 
     @PostMapping("/addproduct")
     @ResponseStatus(HttpStatus.CREATED)
-    public Product addProduct(@RequestBody @Valid ProductDto productDto){
+    public ProductDto addProduct(@RequestBody @Valid ProductDto productDto){
         return sellerService.addProduct(productDto);
     }
 

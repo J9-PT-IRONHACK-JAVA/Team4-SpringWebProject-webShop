@@ -6,12 +6,12 @@ import lombok.Data;
 
 import java.util.List;
 
-@Data
-@Entity
-public class ProductPack extends Product{
+//@Data
+//@Entity
+//public class ProductPack extends Product{
 
 
-    @OneToMany
-    private List<Product> productList;
+    //@OneToMany
+    //private List<Product> productList;
 
-}
+//}

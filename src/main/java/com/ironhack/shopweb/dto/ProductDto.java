@@ -1,5 +1,6 @@
 package com.ironhack.shopweb.dto;
 
+import com.ironhack.shopweb.model.Product;
 import com.ironhack.shopweb.model.Seller;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
@@ -34,4 +35,14 @@ public class ProductDto {
 
     //private List<Order> orderList;
 
+    public static ProductDto fromProduct(Product product){
+        var productDto = new ProductDto();
+        productDto.setName(product.getName());
+        productDto.setDescription(product.getDescription());
+        productDto.setEan(product.getEan());
+        productDto.setPrice(product.getPrice());
+        productDto.setStock(product.getStock());
+        productDto.setSeller(product.getSeller());
+        return productDto;
+    }
 }

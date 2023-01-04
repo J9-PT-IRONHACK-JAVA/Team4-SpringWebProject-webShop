@@ -16,15 +16,15 @@ public class SellerService {
 
 
     private final UserRepository userRepository;
-
     private final ProductRepository productRepository;
 
 
-    public Product addProduct(ProductDto productDto) {
+    public ProductDto addProduct(ProductDto productDto) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         // TODO: Obtenemos el USER con el name de autenthication, lo buscamos en la database, y lo casteamos a Seller
         productDto.setSeller((Seller) userRepository.findByUsername(authentication.getName()).get());
-        return productRepository.save(Product.fromDto(productDto));
+        var product = productRepository.save(Product.fromDto(productDto));
+        return ProductDto.fromProduct(product);
 
     }
 }

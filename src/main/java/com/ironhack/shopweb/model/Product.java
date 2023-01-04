@@ -1,5 +1,6 @@
 package com.ironhack.shopweb.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ironhack.shopweb.dto.ProductDto;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -45,6 +46,7 @@ public class Product {
         product.setEan(productDto.getEan());
         product.setPrice(productDto.getPrice());
         product.setStock(productDto.getStock());
+        product.setSeller(productDto.getSeller());
         return product;
     }
 

@@ -1,5 +1,6 @@
 package com.ironhack.shopweb.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
@@ -25,6 +26,14 @@ public class Seller extends User{
     private String phone;
 
     @OneToMany(mappedBy = "seller",cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Product> productList;
 
+    public Seller(String username, String password, String roles, String companyName, String address, String email, String phone) {
+        super(username, password, roles);
+        this.companyName = companyName;
+        this.address = address;
+        this.email = email;
+        this.phone = phone;
+    }
 }
