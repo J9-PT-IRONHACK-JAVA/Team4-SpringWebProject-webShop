@@ -1,7 +1,7 @@
 package com.ironhack.shopweb.controller;
 
-import com.ironhack.shopweb.exception.ProductNotFoundExeption;
-import com.ironhack.shopweb.model.Product;
+import com.ironhack.shopweb.dto.ClientDto;
+import com.ironhack.shopweb.dto.ProductDto;
 import com.ironhack.shopweb.service.ClientService;
 import com.ironhack.shopweb.service.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -21,18 +21,23 @@ public class ClientController {
     private final ProductService productService;
 
     @GetMapping("/allproducts")
-    public List<Product> findAllProducts(){
+    public List<ProductDto> findAllProducts(){
         return productService.findAllProducts();
     }
 
-    // TODO: Retorna un Product? o un ProductDTO?
     @GetMapping("/viewproduct/{id}")
-    public Optional<Product> viewProduct(@PathVariable Long id){
-        var product = productService.viewProduct(id);
-        if(product.isPresent()) return product;
-        else throw new ProductNotFoundExeption(id);
+    public Optional<ProductDto> viewProduct(@PathVariable Long id){
+        return productService.viewProduct(id);
     }
 
 
-
+    @PatchMapping("/update")
+    public ClientDto updateData(@RequestParam Optional<String> name,
+                                @RequestParam Optional<String> address,
+                                @RequestParam Optional<String> email,
+                                @RequestParam Optional<String> phone,
+                                @RequestParam Optional<String> password
+                                ){
+        return clientService.updateData(name,address,email,phone,password);
+    }
 }

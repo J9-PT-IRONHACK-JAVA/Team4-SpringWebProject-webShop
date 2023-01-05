@@ -1,6 +1,6 @@
 package com.ironhack.shopweb.advice;
 
-import com.ironhack.shopweb.exception.ProductNotFoundExeption;
+import com.ironhack.shopweb.exception.ProductNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -14,9 +14,9 @@ import java.util.Map;
 @RestControllerAdvice
 public class ControllerAdvice {
 
-    @ExceptionHandler(ProductNotFoundExeption.class)
+    @ExceptionHandler(ProductNotFoundException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public String getNotFoundHandler(ProductNotFoundExeption ex){
+    public String getNotFoundHandler(ProductNotFoundException ex){
         return ex.getMessage();
     }
 

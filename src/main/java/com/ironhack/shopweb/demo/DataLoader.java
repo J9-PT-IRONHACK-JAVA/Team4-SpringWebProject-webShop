@@ -1,6 +1,7 @@
 package com.ironhack.shopweb.demo;
 
 
+import com.ironhack.shopweb.model.Client;
 import com.ironhack.shopweb.model.Seller;
 import com.ironhack.shopweb.model.User;
 import com.ironhack.shopweb.repository.UserRepository;
@@ -38,6 +39,10 @@ public class DataLoader {
                 "mail@mail.com","+3423234234");
         userRepository.save(user2);
 
+        var user3 = new Client("client", passwordEncoder.encode("client"),
+                "ROLE_SELLER","Nombre de Cliente","Direccion Cliente",
+                "email@email.com","+3433423423");
+        userRepository.save(user3);
 
 
         log.info("Final Loading Data...");

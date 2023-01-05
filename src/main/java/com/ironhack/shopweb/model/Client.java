@@ -29,4 +29,11 @@ public class Client extends User{
     @OneToOne (mappedBy = "client",cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Cart cart ;
 
+    public Client(String username, String password, String roles, String name, String address, String email, String phone) {
+        super(username, password, roles);
+        this.name = name;
+        this.address = address;
+        this.email = email;
+        this.phone = phone;
+    }
 }

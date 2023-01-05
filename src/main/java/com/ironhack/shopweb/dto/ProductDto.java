@@ -1,5 +1,6 @@
 package com.ironhack.shopweb.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ironhack.shopweb.model.Product;
 import com.ironhack.shopweb.model.Seller;
 import jakarta.validation.constraints.NotBlank;
@@ -28,6 +29,7 @@ public class ProductDto {
     @Positive(message = "Stock must be positive.")
     private Long stock;
 
+    @JsonIgnore
     private Seller seller;
 
     //TODO: Ver si queremos que el producto muestre la lista de CARTS y ORDERS a la que pertenece
