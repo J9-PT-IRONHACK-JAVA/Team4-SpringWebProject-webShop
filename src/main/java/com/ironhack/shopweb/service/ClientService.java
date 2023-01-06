@@ -30,7 +30,6 @@ public class ClientService {
 
     public ClientDto updateData(Optional<String> name, Optional<String> address, Optional<String> email, Optional<String> phone, Optional<String> password) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        // TODO: Obtenemos el USER con el name de autenthication, lo buscamos en la database, y lo casteamos a Seller
         var client = (Client) userRepository.findByUsername(authentication.getName()).get();
 
         name.ifPresent(client::setName);
@@ -45,7 +44,6 @@ public class ClientService {
 
     public CartDto addToCart(Long id) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        // TODO: Obtenemos el USER con el name de autenthication, lo buscamos en la database, y lo casteamos a Seller
         var client = (Client) userRepository.findByUsername(authentication.getName()).get();
         //Obtenemos el producto  -> Puede NO EXISTIR
         var product = productRepository.findById(id).orElseThrow(()-> new ProductNotFoundException(id));

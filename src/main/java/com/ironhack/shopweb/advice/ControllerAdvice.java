@@ -21,11 +21,7 @@ public class ControllerAdvice {
     }
 
 
-
-
     // TODO: Ver la siguiente exceptionHandler
-    // Con esta exeption handler, capturamos la exepcion al validar (el @Valid del gameDTO)
-    // Mapeamos los errores, crea un hashmap con el atrbuto y el error que lanza el valid
 
     @ExceptionHandler(WebExchangeBindException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)

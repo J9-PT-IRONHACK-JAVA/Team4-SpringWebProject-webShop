@@ -14,14 +14,15 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
 
-    private final CartService cartService;
+    //private final CartService cartService;
 
     public Order generateOrder(Client client, Cart cart) {
         var order = new Order();
+        order.setOrderStatus(Status.IN_PROCESS);
         order.setClient(client);
         order.setAmount(cart.getAmount());
+        //TODO: Arregflar esto que peta
         order.setProductList(cart.getProductList());
-        order.setOrderStatus(Status.IN_PROCESS);
         //cartService.cleanCart(cart);
         return orderRepository.save(order);
     }

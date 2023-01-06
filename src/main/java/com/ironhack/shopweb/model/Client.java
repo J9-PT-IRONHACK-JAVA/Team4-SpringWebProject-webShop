@@ -1,6 +1,7 @@
 package com.ironhack.shopweb.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,9 +25,11 @@ public class Client extends User{
 
 
     @OneToMany (mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Order> orderList;
 
     @OneToOne (mappedBy = "client",cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JsonIgnore
     private Cart cart ;
 
     public Client(String username, String password, String roles, String name, String address, String email, String phone) {
