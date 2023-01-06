@@ -5,6 +5,7 @@ import com.ironhack.shopweb.dto.ProductDto;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @Entity
+@ToString(exclude = {"cartList","cartList"})
 public class Product {
 
     @Id

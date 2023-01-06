@@ -1,5 +1,6 @@
 package com.ironhack.shopweb.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ironhack.shopweb.model.Client;
 import com.ironhack.shopweb.model.Order;
 import com.ironhack.shopweb.model.Product;
@@ -13,12 +14,13 @@ import java.util.List;
 @Data
 public class OrderDto {
 
-    private Long id;
+    private String id;
 
     private Status orderStatus;
 
     private BigDecimal amount;
 
+    @JsonIgnore
     private Client client;
 
     private List<Product> productList;

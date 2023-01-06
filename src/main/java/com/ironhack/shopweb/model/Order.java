@@ -1,5 +1,6 @@
 package com.ironhack.shopweb.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -12,8 +13,8 @@ import java.util.List;
 public class Order {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String id;
 
     @Enumerated(EnumType.STRING)
     private Status orderStatus;
@@ -27,8 +28,9 @@ public class Order {
     @ManyToMany
     @JoinTable(
             name = "products_orders",
-            joinColumns = @JoinColumn(name="product_id"),
-            inverseJoinColumns = @JoinColumn (name = "product_order_id"))
+            joinColumns = @JoinColumn(name="order_id"),
+            inverseJoinColumns = @JoinColumn (name = "product_id"))
+    @JsonIgnore
     private List<Product> productList;
 
 }

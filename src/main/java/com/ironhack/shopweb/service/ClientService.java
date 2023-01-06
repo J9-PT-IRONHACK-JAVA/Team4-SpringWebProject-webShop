@@ -15,6 +15,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -69,11 +71,18 @@ public class ClientService {
     public OrderDto checkout() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         var client = (Client) userRepository.findByUsername(authentication.getName()).get();
-        Cart cart = cartService.getCart(client);
+        var cart = cartService.getCart(client);
         return OrderDto.fromOrder(orderService.generateOrder(client, cart));
     }
 
 
-
-
+    public List<OrderDto> findAllOrders() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        var client = (Client) userRepository.findByUsername(authentication.getName()).get();
+        var orderListDto = new ArrayList<OrderDto>();
+        for(Order order : client.getOrderList()){
+            orderListDto.add(OrderDto.fromOrder(order));
+        }
+        return orderListDto;
+    }
 }

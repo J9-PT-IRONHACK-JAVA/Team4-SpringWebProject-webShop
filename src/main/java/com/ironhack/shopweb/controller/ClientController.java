@@ -56,4 +56,9 @@ public class ClientController {
     public CartDto viewCart(){
         return clientService.viewcart();
     }
+
+    @GetMapping("/orders")
+    public List<OrderDto> findAllOrders(){
+        return clientService.findAllOrders();
+    }
 }
