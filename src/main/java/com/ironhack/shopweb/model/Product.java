@@ -30,12 +30,15 @@ public class Product {
 
     @ManyToOne
     @JoinColumn (name="seller_id")
+    @JsonIgnore
     private Seller seller;
 
     @ManyToMany(mappedBy = "productList")
+    @JsonIgnore
     private List<Cart> cartList;
 
     @ManyToMany(mappedBy = "productList")
+    @JsonIgnore
     private List<Order> orderList;
 
 

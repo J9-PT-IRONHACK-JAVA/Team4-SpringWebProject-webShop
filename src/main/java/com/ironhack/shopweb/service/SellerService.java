@@ -58,10 +58,4 @@ public class SellerService {
         }
     }
 
-    public SellerDto registerSeller(SellerDto sellerDto) {
-        sellerDto.setPassword(passwordEncoder.encode(sellerDto.getPassword()));
-        System.out.println(sellerDto.getPassword());
-        var seller = userRepository.save(Seller.fromDto(sellerDto));
-        return SellerDto.fromSeller(seller);
-    }
 }

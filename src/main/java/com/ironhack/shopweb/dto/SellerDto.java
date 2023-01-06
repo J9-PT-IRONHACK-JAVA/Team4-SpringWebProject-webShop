@@ -16,8 +16,8 @@ public class SellerDto {
 
     // TODO: ver como solucionar que NO MUESTRE EL PASSWORD, pero que nos permita crearlo
     // Lo que podemos hacer es de crearlo pasandole un SELLER y no un SELLERDTO
-    //@JsonIgnore
-    //@NotBlank (message = "Password cannot be blank")
+    @JsonIgnore
+    @NotBlank (message = "Password cannot be blank")
     private String password;
 
     @NotBlank (message = "Company Name cannot be blank")

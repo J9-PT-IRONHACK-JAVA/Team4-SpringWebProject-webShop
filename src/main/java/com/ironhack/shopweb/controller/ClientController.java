@@ -1,6 +1,8 @@
 package com.ironhack.shopweb.controller;
 
+import com.ironhack.shopweb.dto.CartDto;
 import com.ironhack.shopweb.dto.ClientDto;
+import com.ironhack.shopweb.dto.OrderDto;
 import com.ironhack.shopweb.dto.ProductDto;
 import com.ironhack.shopweb.service.ClientService;
 import com.ironhack.shopweb.service.ProductService;
@@ -39,5 +41,19 @@ public class ClientController {
                                 @RequestParam Optional<String> password
                                 ){
         return clientService.updateData(name,address,email,phone,password);
+    }
+
+    @PutMapping("/addtocart/{productId}")
+    public CartDto addToCart(@PathVariable Long productId){
+        return clientService.addToCart(productId);
+    }
+    @PutMapping("/checkout")
+    public OrderDto checkout(){
+        return clientService.checkout();
+    }
+
+    @GetMapping("/cart")
+    public CartDto viewCart(){
+        return clientService.viewcart();
     }
 }

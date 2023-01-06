@@ -28,19 +28,30 @@ public class SecurityConfig {
         return http
                 .csrf().disable()
                 .authorizeHttpRequests()
+
                 //TODO: Todas las rutas y la autorizacion segun el tipo de USUARIO
                 //.requestMatchers("/public").permitAll()
+
+                // CLIENT ENDPOINTS
                 .requestMatchers(HttpMethod.GET,"/client").hasRole("CLIENT")
                 .requestMatchers(HttpMethod.PATCH,"/client").hasRole("CLIENT")
+
+                // SELLER ENDPOINTS
                 .requestMatchers(HttpMethod.POST,"/seller").hasRole("SELLER")
                 .requestMatchers(HttpMethod.PATCH,"/seller").hasRole("SELLER")
-                .requestMatchers(HttpMethod.POST,"/users/registerseller").permitAll()
 
-                //.requestMatchers(HttpMethod.DELETE,"/quotes/**").hasRole("ADMIN")
-                //.requestMatchers(HttpMethod.PATCH,"/quotes/**").hasRole("ADMIN")
-                //.requestMatchers(HttpMethod.POST,"/users").hasRole("ADMIN")
-                //.anyRequest()
-                //.authenticated()
+                // REGISTER ENDPOINTS - Free access
+                .requestMatchers(HttpMethod.POST,"/users/registerseller").permitAll()
+                .requestMatchers(HttpMethod.POST,"/users/registerclient").permitAll()
+
+                // ADMIN ENDPOINTS
+
+                //.requestMatchers(HttpMethod.DELETE,"/").hasRole("ADMIN")
+                //.requestMatchers(HttpMethod.PATCH,"/").hasRole("ADMIN")
+                //.requestMatchers(HttpMethod.POST,"/").hasRole("ADMIN")
+
+                .anyRequest()
+                .authenticated()
                 .and()
                 .userDetailsService(jpaUserDetailService)
                 .httpBasic()

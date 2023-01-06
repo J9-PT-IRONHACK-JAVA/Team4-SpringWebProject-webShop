@@ -1,5 +1,6 @@
 package com.ironhack.shopweb.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,22 +14,22 @@ import java.util.List;
 public class Cart {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //El id es el mismo del usuario
     private Long id;
-
-    private boolean isActive;
 
     private BigDecimal amount;
 
     @OneToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "client_id")
+    @JsonIgnore
     private Client client;
 
     @ManyToMany
     @JoinTable(
             name = "products_carts",
-            joinColumns = @JoinColumn(name="product_id"),
-            inverseJoinColumns = @JoinColumn (name = "product_cart_id"))
+            joinColumns = @JoinColumn(name="cart_id"),
+            inverseJoinColumns = @JoinColumn (name = "product_id"))
+    @JsonIgnore
     private List<Product> productList;
 
 }
