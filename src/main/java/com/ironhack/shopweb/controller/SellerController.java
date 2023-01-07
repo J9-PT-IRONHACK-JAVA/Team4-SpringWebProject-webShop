@@ -31,6 +31,7 @@ public class SellerController {
     }
 
     @PatchMapping("/updateproduct/{id}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
     public ProductDto updateProduct(@PathVariable Long id,
                                 @RequestParam Optional<String> name,
                                 @RequestParam Optional<String> description,
@@ -41,6 +42,10 @@ public class SellerController {
         return sellerService.updateProduct(id,name,description,ean,price,stock);
     }
 
-
+    @DeleteMapping("/delete/{id}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public String deleteProduct(@PathVariable Long id){
+        return sellerService.deleteProduct(id);
+    }
 
 }

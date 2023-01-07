@@ -24,9 +24,11 @@ public class ProductDto {
     private String ean;
 
     @Positive(message = "Price must be positive.")
+    @NotBlank(message = "Price cannot be blank.")
     private BigDecimal price;
 
     @Positive(message = "Stock must be positive.")
+    @NotBlank(message = "Stock cannot be blank.")
     private Long stock;
 
     @JsonIgnore

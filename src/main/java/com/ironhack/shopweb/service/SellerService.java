@@ -58,4 +58,19 @@ public class SellerService {
         }
     }
 
+    public String deleteProduct(Long id) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        var user = authentication.getName();
+        var product = productRepository.findById(id);
+        if(product.isPresent()){
+            if(product.get().getSeller().getUsername().equals(user)) {
+                productRepository.delete(product.get());
+                return "Product '"+product.get().getName()+"' deleted.";
+            }else{
+                return "Seller has not authorization for delete product id "+product.get().getId();
+            }
+        }else{
+            throw new ProductNotFoundException(id);
+        }
+    }
 }
