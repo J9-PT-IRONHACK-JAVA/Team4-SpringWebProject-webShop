@@ -23,6 +23,7 @@ public class Client extends User{
 
     private String phone;
 
+    private String language;
 
     @OneToMany (mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
@@ -32,11 +33,12 @@ public class Client extends User{
     @JsonIgnore
     private Cart cart ;
 
-    public Client(String username, String password, String roles, String name, String address, String email, String phone) {
+    public Client(String username, String password, String roles, String name, String address, String email, String phone, String language) {
         super(username, password, roles);
         this.name = name;
         this.address = address;
         this.email = email;
         this.phone = phone;
+        this.language = language;
     }
 }

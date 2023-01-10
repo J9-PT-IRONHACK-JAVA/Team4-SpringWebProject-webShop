@@ -44,6 +44,7 @@ public class UserService {
     public ClientDto registerClient(Client client) {
         client.setPassword(passwordEncoder.encode(client.getPassword()));
         client.setRoles("ROLE_USER");
+        if (client.getLanguage().isEmpty()) client.setLanguage("EN"); //TODO: ver si va con el isempty o isblank
         var user = userRepository.save(client);
         // Cuando creamos el usuario, creamos el carrito
         cartService.createCart(client);

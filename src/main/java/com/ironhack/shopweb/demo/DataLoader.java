@@ -41,7 +41,7 @@ public class DataLoader {
 
         var user3 = new Client("client", passwordEncoder.encode("client"),
                 "ROLE_CLIENT","Nombre de Cliente","Direccion Cliente",
-                "email@email.com","+3433423423");
+                "email@email.com","+3433423423","ES");
         userRepository.save(user3);
 
 

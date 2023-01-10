@@ -20,6 +20,8 @@ public class ClientDto {
 
     private String phone;
 
+    private String language;
+
     public static ClientDto fromClient(Client client) {
         var clientDto = new ClientDto();
         clientDto.setUsername(client.getUsername());
@@ -28,6 +30,7 @@ public class ClientDto {
         clientDto.setAddress(client.getAddress());
         clientDto.setEmail(client.getEmail());
         clientDto.setPhone(client.getPhone());
+        clientDto.setLanguage(client.getLanguage());
         return clientDto;
     }
 }

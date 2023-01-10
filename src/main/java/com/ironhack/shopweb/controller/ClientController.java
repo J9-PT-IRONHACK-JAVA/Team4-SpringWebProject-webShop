@@ -1,9 +1,6 @@
 package com.ironhack.shopweb.controller;
 
-import com.ironhack.shopweb.dto.CartDto;
-import com.ironhack.shopweb.dto.ClientDto;
-import com.ironhack.shopweb.dto.OrderDto;
-import com.ironhack.shopweb.dto.ProductDto;
+import com.ironhack.shopweb.dto.*;
 import com.ironhack.shopweb.service.ClientService;
 import com.ironhack.shopweb.service.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +16,6 @@ public class ClientController {
 
 
     private final ClientService clientService;
-
     private final ProductService productService;
 
     @GetMapping("/allproducts")
@@ -32,15 +28,15 @@ public class ClientController {
         return productService.viewProduct(id);
     }
 
-
     @PatchMapping("/update")
     public ClientDto updateData(@RequestParam Optional<String> name,
                                 @RequestParam Optional<String> address,
                                 @RequestParam Optional<String> email,
                                 @RequestParam Optional<String> phone,
-                                @RequestParam Optional<String> password
-                                ){
-        return clientService.updateData(name,address,email,phone,password);
+                                @RequestParam Optional<String> password,
+                                @RequestParam Optional<String> language
+    ){
+        return clientService.updateData(name,address,email,phone,password,language);
     }
 
     @PutMapping("/addtocart/{productId}")
@@ -61,4 +57,5 @@ public class ClientController {
     public List<OrderDto> findAllOrders(){
         return clientService.findAllOrders();
     }
+
 }

@@ -36,10 +36,5 @@ public class UserController {
         return userService.registerClient(client);
     }
 
-
-    //TODO:
-    // Update ORDER STATUS-
-
-
 }
 

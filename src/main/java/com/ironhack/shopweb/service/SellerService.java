@@ -31,7 +31,6 @@ public class SellerService {
 
     public ProductDto addProduct(ProductDto productDto) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        // TODO: Obtenemos el USER con el name de autenthication, lo buscamos en la database, y lo casteamos a Seller
         productDto.setSeller((Seller) userRepository.findByUsername(authentication.getName()).get());
         var product = productRepository.save(Product.fromDto(productDto));
         return ProductDto.fromProduct(product);
