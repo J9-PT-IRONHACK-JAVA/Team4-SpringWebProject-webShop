@@ -9,7 +9,5 @@ public class UserDto {
 
     private String password;
 
-    //TODO: Le ponemos que reciba ROLES? Y que solo el USERDTO lo use el Admin??
-
 
 }

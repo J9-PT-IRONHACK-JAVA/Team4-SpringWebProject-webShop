@@ -1,6 +1,7 @@
 package com.ironhack.shopweb.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.ironhack.shopweb.dto.SellerDto;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
@@ -35,5 +36,17 @@ public class Seller extends User{
         this.address = address;
         this.email = email;
         this.phone = phone;
+    }
+
+    public static Seller fromDto(SellerDto sellerDto){
+        var seller = new Seller();
+        seller.setUsername(sellerDto.getUsername());
+        seller.setPassword(sellerDto.getPassword());
+        seller.setRoles("ROLE_SELLER");
+        seller.setCompanyName(sellerDto.getCompanyName());
+        seller.setAddress(sellerDto.getAddress());
+        seller.setEmail(sellerDto.getEmail());
+        seller.setPhone(sellerDto.getPhone());
+        return seller;
     }
 }
