@@ -22,6 +22,8 @@ public class ClientDto {
 
     private String language;
 
+    private String platform;
+
     public static ClientDto fromClient(Client client) {
         var clientDto = new ClientDto();
         clientDto.setUsername(client.getUsername());
@@ -31,6 +33,8 @@ public class ClientDto {
         clientDto.setEmail(client.getEmail());
         clientDto.setPhone(client.getPhone());
         clientDto.setLanguage(client.getLanguage());
+        clientDto.setPlatform(client.getPlatform());
+
         return clientDto;
     }
 }

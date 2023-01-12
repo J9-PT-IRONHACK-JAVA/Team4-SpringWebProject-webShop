@@ -14,8 +14,6 @@ public class SellerDto {
     @NotBlank (message = "Username cannot be blank")
     private String username;
 
-    // TODO: ver como solucionar que NO MUESTRE EL PASSWORD, pero que nos permita crearlo
-    // Lo que podemos hacer es de crearlo pasandole un SELLER y no un SELLERDTO
     @JsonIgnore
     @NotBlank (message = "Password cannot be blank")
     private String password;
@@ -36,6 +34,8 @@ public class SellerDto {
     @JsonIgnore
     private List<Product> productList;
 
+    private String platform;
+
     public static SellerDto fromSeller(Seller seller) {
         var sellerDto = new SellerDto();
         sellerDto.setUsername(seller.getUsername());
@@ -44,6 +44,7 @@ public class SellerDto {
         sellerDto.setAddress(seller.getAddress());
         sellerDto.setEmail(seller.getEmail());
         sellerDto.setPhone(seller.getPhone());
+        sellerDto.setPlatform(seller.getPlatform());
         return sellerDto;
     }
 }

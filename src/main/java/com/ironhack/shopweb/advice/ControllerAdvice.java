@@ -23,6 +23,7 @@ public class ControllerAdvice {
 
     // TODO: Ver la siguiente exceptionHandler
 
+
     @ExceptionHandler(WebExchangeBindException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public Map<String, String> handleValidationExceptions(WebExchangeBindException ex) {

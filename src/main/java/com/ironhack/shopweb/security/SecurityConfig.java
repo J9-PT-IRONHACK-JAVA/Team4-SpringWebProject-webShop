@@ -29,9 +29,6 @@ public class SecurityConfig {
                 .csrf().disable()
                 .authorizeHttpRequests()
 
-                //TODO: Todas las rutas y la autorizacion segun el tipo de USUARIO
-                //.requestMatchers("/public").permitAll()
-
                 // CLIENT ENDPOINTS
                 .requestMatchers(HttpMethod.GET,"/client").hasRole("CLIENT")
                 .requestMatchers(HttpMethod.PATCH,"/client").hasRole("CLIENT")
@@ -41,14 +38,13 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.PATCH,"/seller").hasRole("SELLER")
 
                 // REGISTER ENDPOINTS - Free access
-                .requestMatchers(HttpMethod.POST,"/users/registerseller").permitAll()
-                .requestMatchers(HttpMethod.POST,"/users/registerclient").permitAll()
+                .requestMatchers(HttpMethod.POST,"/registerseller").permitAll()
+                .requestMatchers(HttpMethod.POST,"/registerclient").permitAll()
+
 
                 // ADMIN ENDPOINTS
-
-                //.requestMatchers(HttpMethod.DELETE,"/").hasRole("ADMIN")
-                //.requestMatchers(HttpMethod.PATCH,"/").hasRole("ADMIN")
-                //.requestMatchers(HttpMethod.POST,"/").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET,"/headers").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST,"/user").hasRole("ADMIN")
 
                 .anyRequest()
                 .authenticated()

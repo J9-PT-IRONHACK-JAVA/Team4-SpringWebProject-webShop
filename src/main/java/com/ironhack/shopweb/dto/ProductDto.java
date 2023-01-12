@@ -37,11 +37,6 @@ public class ProductDto {
     @JsonIgnore
     private Seller seller;
 
-    //TODO: Ver si queremos que el producto muestre la lista de CARTS y ORDERS a la que pertenece
-    //private List<Cart> cartList;
-
-    //private List<Order> orderList;
-
     public static ProductDto fromProduct(Product product){
         var productDto = new ProductDto();
         productDto.setName(product.getName());

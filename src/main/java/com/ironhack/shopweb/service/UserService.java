@@ -35,16 +35,18 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public SellerDto registerSeller(Seller seller) {
+    public SellerDto registerSeller(Seller seller, String platform) {
         seller.setPassword(passwordEncoder.encode(seller.getPassword()));
         seller.setRoles("ROLE_SELLER");
+        seller.setPlatform(platform);
         return SellerDto.fromSeller(userRepository.save(seller));
     }
 
-    public ClientDto registerClient(Client client) {
+    public ClientDto registerClient(Client client, String platform) {
         client.setPassword(passwordEncoder.encode(client.getPassword()));
         client.setRoles("ROLE_USER");
-        if (client.getLanguage().isEmpty()) client.setLanguage("EN"); //TODO: ver si va con el isempty o isblank
+        client.setPlatform(platform);
+        if (client.getLanguage().isEmpty()) client.setLanguage("EN");
         var user = userRepository.save(client);
         // Cuando creamos el usuario, creamos el carrito
         cartService.createCart(client);
