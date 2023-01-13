@@ -24,6 +24,8 @@ public class User {
 
     private Boolean isAccountNonLocked;
 
+    private String platform;
+
     @CreationTimestamp
     private Instant creationDate;
 

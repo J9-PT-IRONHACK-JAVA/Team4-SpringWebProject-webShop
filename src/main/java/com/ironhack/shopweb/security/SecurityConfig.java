@@ -1,6 +1,7 @@
 package com.ironhack.shopweb.security;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -16,21 +17,22 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
 
+
     private final JpaUserDetailService jpaUserDetailService;
+
 
     @Bean
     PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
 
+
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf().disable()
                 .authorizeHttpRequests()
-
-                //TODO: Todas las rutas y la autorizacion segun el tipo de USUARIO
-                //.requestMatchers("/public").permitAll()
 
                 // CLIENT ENDPOINTS
                 .requestMatchers(HttpMethod.GET,"/client").hasRole("CLIENT")
@@ -41,14 +43,13 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.PATCH,"/seller").hasRole("SELLER")
 
                 // REGISTER ENDPOINTS - Free access
-                .requestMatchers(HttpMethod.POST,"/users/registerseller").permitAll()
-                .requestMatchers(HttpMethod.POST,"/users/registerclient").permitAll()
+                .requestMatchers(HttpMethod.POST,"/registerseller").permitAll()
+                .requestMatchers(HttpMethod.POST,"/registerclient").permitAll()
+
 
                 // ADMIN ENDPOINTS
-
-                //.requestMatchers(HttpMethod.DELETE,"/").hasRole("ADMIN")
-                //.requestMatchers(HttpMethod.PATCH,"/").hasRole("ADMIN")
-                //.requestMatchers(HttpMethod.POST,"/").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET,"/headers").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST,"/user").hasRole("ADMIN")
 
                 .anyRequest()
                 .authenticated()

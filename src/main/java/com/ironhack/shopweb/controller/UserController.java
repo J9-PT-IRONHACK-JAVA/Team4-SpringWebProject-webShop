@@ -10,30 +10,45 @@ import com.ironhack.shopweb.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
-@RequestMapping("/users")
+@RequestMapping
 @RequiredArgsConstructor
 public class UserController {
 
     private final UserService userService;
 
-    @PostMapping
+    @PostMapping("/user")
+    @ResponseStatus(HttpStatus.CREATED)
     public User createUser (@RequestBody UserDto userDto){
         return userService.createUser(userDto);
     }
 
-    @PostMapping("/registerseller")
+    @PostMapping(value = "/registerseller")
     @ResponseStatus(HttpStatus.CREATED)
-    public SellerDto registerSeller(@RequestBody @Valid Seller seller){
-        return userService.registerSeller(seller);
+    public SellerDto registerSeller(@RequestBody @Valid Seller seller,
+                                    @RequestHeader("user-agent") String platform){
+        return userService.registerSeller(seller, platform);
     }
 
-    @PostMapping("/registerclient")
+    @PostMapping(value = "/registerclient")
     @ResponseStatus(HttpStatus.CREATED)
-    public ClientDto registerClient(@RequestBody @Valid Client client){
-        return userService.registerClient(client);
+    public ClientDto registerClient(@RequestBody Client client,
+                                    @RequestHeader("user-agent") String platform){
+        return userService.registerClient(client, platform);
+    }
+
+    @GetMapping("/headers")
+    public String getHeaders(@RequestHeader Map<String,String> headers){
+        var response = new String();
+        for (String key : headers.keySet()){
+            response = response + "Header Name: "+key+" - Header Value: "+headers.get(key)+"+\n";
+        }
+        return response;
     }
 
 }
