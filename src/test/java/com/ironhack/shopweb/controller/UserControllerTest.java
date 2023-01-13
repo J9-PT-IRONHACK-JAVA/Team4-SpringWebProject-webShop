@@ -8,6 +8,7 @@ import com.ironhack.shopweb.dto.UserDto;
 import com.ironhack.shopweb.model.Client;
 import com.ironhack.shopweb.model.Seller;
 import com.ironhack.shopweb.model.User;
+import com.ironhack.shopweb.repository.UserRepository;
 import com.ironhack.shopweb.security.*;
 import com.ironhack.shopweb.service.UserService;
 import org.junit.jupiter.api.Test;
@@ -36,10 +37,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 
 
-//@SpringBootTest
-@WebMvcTest(UserControllerTest.class)
-//@Import({SecurityConfig2.class})
-//@WithMockUser(username = "admin", password = "admin",roles = {"ADMIN"})
+@SpringBootTest
+//@WebMvcTest(UserControllerTest.class)
+//@Import({SecurityConfig.class})
+@WithMockUser(username = "admin", password = "admin",roles = {"ADMIN"})
 @AutoConfigureMockMvc
 class UserControllerTest {
 
@@ -63,6 +64,7 @@ class UserControllerTest {
 
         mockMvc.perform(post("/user")
                         .with(httpBasic("admin","admin"))
+                        .header("User-Agent","Test")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(om.writeValueAsString(userToCreate)))
                 .andDo(print())
@@ -84,10 +86,13 @@ class UserControllerTest {
         when(userService.registerClient(clientToCreate,"Postman")).thenReturn(clientCreated);
 
         mockMvc.perform(post("/registerclient")
+                        .header("User-Agent","Test")
+                        .contentType(MediaType.APPLICATION_JSON)
                         .content(om.writeValueAsString(clientToCreate)))
                 .andDo(print())
                 .andExpect(status().isCreated())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.username").value("client"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.*").value("client"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.*").value("Test"));
     }
 
     @Test
@@ -103,10 +108,12 @@ class UserControllerTest {
         when(userService.registerSeller(sellerToCreate,"Postman")).thenReturn(sellerCreated);
 
         mockMvc.perform(post("/registerseller")
+                        .header("User-Agent","Test")
+                        .contentType(MediaType.APPLICATION_JSON)
                         .content(om.writeValueAsString(sellerToCreate)))
                 .andDo(print())
                 .andExpect(status().isCreated())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.username").value("client"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.username").value("seller"));
     }
 
 
