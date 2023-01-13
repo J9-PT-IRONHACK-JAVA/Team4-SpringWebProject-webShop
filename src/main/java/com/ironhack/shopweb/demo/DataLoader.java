@@ -27,6 +27,8 @@ public class DataLoader {
 
     @EventListener(ApplicationReadyEvent.class)
     public void loadData(){
+
+
         log.info("Loading Data to Database....");
 
 

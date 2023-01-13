@@ -23,6 +23,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/user")
+    @ResponseStatus(HttpStatus.CREATED)
     public User createUser (@RequestBody UserDto userDto){
         return userService.createUser(userDto);
     }
