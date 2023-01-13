@@ -4,18 +4,20 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ironhack.shopweb.model.Product;
 import com.ironhack.shopweb.model.Seller;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class SellerDto {
 
     @NotBlank (message = "Username cannot be blank")
     private String username;
 
-    // TODO: ver como solucionar que NO MUESTRE EL PASSWORD, pero que nos permita crearlo
-    // Lo que podemos hacer es de crearlo pasandole un SELLER y no un SELLERDTO
     @JsonIgnore
     @NotBlank (message = "Password cannot be blank")
     private String password;
@@ -36,6 +38,8 @@ public class SellerDto {
     @JsonIgnore
     private List<Product> productList;
 
+    private String platform;
+
     public static SellerDto fromSeller(Seller seller) {
         var sellerDto = new SellerDto();
         sellerDto.setUsername(seller.getUsername());
@@ -44,6 +48,7 @@ public class SellerDto {
         sellerDto.setAddress(seller.getAddress());
         sellerDto.setEmail(seller.getEmail());
         sellerDto.setPhone(seller.getPhone());
+        sellerDto.setPlatform(seller.getPlatform());
         return sellerDto;
     }
 }

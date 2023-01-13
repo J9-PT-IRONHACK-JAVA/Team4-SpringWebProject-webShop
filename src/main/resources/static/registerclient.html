@@ -1,0 +1,42 @@
+<form id="registerForm">
+        <label for="username" class="formbuilder-text-label">Username<span class="formbuilder-required">*</span></label><br>
+        <input type="text" class="form-control" name="username" access="false" id="username" required="required" aria-required="true"><br>
+        <label for="password" class="formbuilder-text-label">Password<span class="formbuilder-required">*</span></label><br>
+        <input type="password" class="form-control" name="password" access="false" id="password" required="required" aria-required="true"><br>
+        <label for="name" class="formbuilder-text-label">Name Complete<span class="formbuilder-required">*</span></label><br>
+        <input type="text" class="form-control" name="name" access="false" id="name" required="required" aria-required="true"><br>
+        <label for="address" class="formbuilder-text-label">Address<span class="formbuilder-required">*</span></label><br>
+        <input type="text" class="form-control" name="address" access="false" id="address" required="required" aria-required="true"><br>
+        <label for="email" class="formbuilder-text-label">Email<span class="formbuilder-required">*</span></label><br>
+        <input type="text" class="form-control" name="email" access="false" id="email" required="required" aria-required="true"><br>
+        <label for="phone" class="formbuilder-text-label">Phone Number</label><br>
+        <input type="text" class="form-control" name="phone" access="false" id="phone"><br><br>
+
+        <label for="language">Choose a Language:</label>
+        <select name="language" id="language" >
+                <option value="ES">Spanish</option>
+                <option value="IT">Italian</option>
+                <option value="RU">Russian</option>
+                <option value="PT">Portuguese</option>
+        </select>
+        <br>
+        <input type="submit" value="Register"><br>
+</form>
+
+<script>
+    document.getElementById("registerForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+        var formData = new FormData(this);
+        var jsonData = JSON.stringify(Object.fromEntries(formData));
+        fetch("http://localhost:8080/registerclient", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: jsonData,
+        })
+            .then(response => {
+                if (response.ok) {
+                    window.location.href = "ok.html";
+                }
+            }).catch(error => console.log("Error: " + error));
+    });
+</script>
