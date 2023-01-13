@@ -1,6 +1,8 @@
 package com.ironhack.shopweb.demo;
 
 
+import com.ironhack.shopweb.model.Client;
+import com.ironhack.shopweb.model.Seller;
 import com.ironhack.shopweb.model.User;
 import com.ironhack.shopweb.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +27,8 @@ public class DataLoader {
 
     @EventListener(ApplicationReadyEvent.class)
     public void loadData(){
+
+
         log.info("Loading Data to Database....");
 
 
@@ -32,9 +36,15 @@ public class DataLoader {
         userRepository.save(user1);
 
 
-        var user2 = new User("user",passwordEncoder.encode("user"),"ROLE_USER");
+        var user2 = new Seller("seller", passwordEncoder.encode("seller"),
+                "ROLE_SELLER","COMPANY NAME","Carrer dels Filadors 22 Barcelona",
+                "mail@mail.com","+3423234234");
         userRepository.save(user2);
 
+        var user3 = new Client("client", passwordEncoder.encode("client"),
+                "ROLE_CLIENT","Nombre de Cliente","Direccion Cliente",
+                "email@email.com","+3433423423","ES");
+        userRepository.save(user3);
 
 
         log.info("Final Loading Data...");

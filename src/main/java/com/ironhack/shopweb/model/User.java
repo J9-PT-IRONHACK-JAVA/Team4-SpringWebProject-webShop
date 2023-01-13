@@ -9,6 +9,7 @@ import java.time.Instant;
 
 @Data
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Table(name = "users")
 public class User {
     @Id
@@ -22,6 +23,8 @@ public class User {
     private String roles;
 
     private Boolean isAccountNonLocked;
+
+    private String platform;
 
     @CreationTimestamp
     private Instant creationDate;

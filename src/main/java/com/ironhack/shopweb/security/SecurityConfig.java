@@ -1,6 +1,7 @@
 package com.ironhack.shopweb.security;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -16,24 +17,40 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
 
+
     private final JpaUserDetailService jpaUserDetailService;
+
 
     @Bean
     PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
 
+
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf().disable()
                 .authorizeHttpRequests()
-                //.requestMatchers("/public").permitAll()
-                //.requestMatchers(HttpMethod.GET,"/quotes").permitAll()
-                //.requestMatchers(HttpMethod.POST,"/quotes").hasRole("USER")
-                //.requestMatchers(HttpMethod.DELETE,"/quotes/**").hasRole("ADMIN")
-                //.requestMatchers(HttpMethod.PATCH,"/quotes/**").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.POST,"/users").hasRole("ADMIN")
+
+                // CLIENT ENDPOINTS
+                .requestMatchers(HttpMethod.GET,"/client").hasRole("CLIENT")
+                .requestMatchers(HttpMethod.PATCH,"/client").hasRole("CLIENT")
+
+                // SELLER ENDPOINTS
+                .requestMatchers(HttpMethod.POST,"/seller").hasRole("SELLER")
+                .requestMatchers(HttpMethod.PATCH,"/seller").hasRole("SELLER")
+
+                // REGISTER ENDPOINTS - Free access
+                .requestMatchers(HttpMethod.POST,"/registerseller").permitAll()
+                .requestMatchers(HttpMethod.POST,"/registerclient").permitAll()
+
+
+                // ADMIN ENDPOINTS
+                .requestMatchers(HttpMethod.GET,"/headers").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST,"/user").hasRole("ADMIN")
+
                 .anyRequest()
                 .authenticated()
                 .and()
