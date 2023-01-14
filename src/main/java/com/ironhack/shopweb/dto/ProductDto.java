@@ -3,7 +3,6 @@ package com.ironhack.shopweb.dto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ironhack.shopweb.model.Product;
 import com.ironhack.shopweb.model.Seller;
-import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
@@ -16,23 +15,18 @@ import java.math.BigDecimal;
 @Data
 @NoArgsConstructor
 public class ProductDto {
-    //private Long id;
-
     @NotBlank(message = "Name cannot be blank.")
     private String name;
 
-    //@NotBlank(message = "Description cannot be blank.")
     private String description;
 
     private String ean;
 
     @Positive(message = "Price must be positive.")
-    //@NotBlank(message = "Price cannot be blank.")
     @Digits(integer=3, fraction=2)
     private BigDecimal price;
 
     @Positive(message = "Stock must be positive.")
-    //@NotBlank(message = "Stock cannot be blank.")
     private Long stock;
 
     @JsonIgnore

@@ -1,7 +1,6 @@
 package com.ironhack.shopweb.service;
 
 import com.ironhack.shopweb.dto.ProductDto;
-import com.ironhack.shopweb.dto.SellerDto;
 import com.ironhack.shopweb.exception.NoAuthorizationException;
 import com.ironhack.shopweb.exception.ProductNotFoundException;
 import com.ironhack.shopweb.model.Product;
@@ -22,7 +21,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class SellerService {
 
-
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
 
@@ -37,7 +35,6 @@ public class SellerService {
         product.setDescription(openaiService.requestDescription(product.getName()));
         product = productRepository.save(product);
         return ProductDto.fromProduct(product);
-
     }
 
     public ProductDto updateProduct(Long id, Optional<String> name, Optional<String> description, Optional<String> ean, Optional<BigDecimal> price, Optional<Long> stock) {

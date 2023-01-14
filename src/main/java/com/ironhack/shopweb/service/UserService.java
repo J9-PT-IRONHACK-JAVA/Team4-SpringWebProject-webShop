@@ -3,17 +3,13 @@ package com.ironhack.shopweb.service;
 import com.ironhack.shopweb.dto.ClientDto;
 import com.ironhack.shopweb.dto.SellerDto;
 import com.ironhack.shopweb.dto.UserDto;
-import com.ironhack.shopweb.model.Cart;
 import com.ironhack.shopweb.model.Client;
 import com.ironhack.shopweb.model.Seller;
 import com.ironhack.shopweb.model.User;
-import com.ironhack.shopweb.repository.CartRepository;
 import com.ironhack.shopweb.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.math.BigDecimal;
 
 @Service
 @RequiredArgsConstructor
@@ -24,8 +20,6 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
     private final CartService cartService;
-
-
 
     public User createUser(UserDto userDto){
         var user = new User();
@@ -48,7 +42,6 @@ public class UserService {
         client.setPlatform(platform);
         if (client.getLanguage().isEmpty()) client.setLanguage("EN");
         var user = userRepository.save(client);
-        // Cuando creamos el usuario, creamos el carrito
         cartService.createCart(client);
         return ClientDto.fromClient(user);
     }

@@ -14,7 +14,6 @@ import java.util.List;
 public class Cart {
 
     @Id
-    //El id es el mismo del usuario
     private Long id;
 
     private BigDecimal amount;

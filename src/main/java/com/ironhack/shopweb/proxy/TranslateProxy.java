@@ -1,9 +1,7 @@
 package com.ironhack.shopweb.proxy;
 
 import com.ironhack.shopweb.dto.TranslateDto;
-import feign.Headers;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 @FeignClient(name ="Deepl-translate", url="https://api-free.deepl.com/v2/translate")

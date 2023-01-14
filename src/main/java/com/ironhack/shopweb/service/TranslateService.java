@@ -14,8 +14,4 @@ public class TranslateService {
         var toTranslate= translateProxy.translate(text,language);
         return toTranslate.getTranslations().get(0).getText();
     }
-
-
-
-
 }
