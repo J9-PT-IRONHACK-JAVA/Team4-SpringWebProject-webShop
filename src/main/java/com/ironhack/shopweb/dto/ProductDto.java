@@ -7,13 +7,14 @@ import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
 
 @Data
+@NoArgsConstructor
 public class ProductDto {
-
     @NotBlank(message = "Name cannot be blank.")
     private String name;
 
@@ -30,6 +31,13 @@ public class ProductDto {
 
     @JsonIgnore
     private Seller seller;
+
+    public ProductDto(String name, String ean, BigDecimal price, Long stock) {
+        this.name = name;
+        this.ean = ean;
+        this.price = price;
+        this.stock = stock;
+    }
 
     public static ProductDto fromProduct(Product product){
         var productDto = new ProductDto();

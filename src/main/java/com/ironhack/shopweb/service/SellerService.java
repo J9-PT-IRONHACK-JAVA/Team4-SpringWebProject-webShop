@@ -8,6 +8,7 @@ import com.ironhack.shopweb.model.Seller;
 import com.ironhack.shopweb.repository.ProductRepository;
 import com.ironhack.shopweb.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.aspectj.apache.bcel.classfile.Module;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,10 +26,14 @@ public class SellerService {
 
     private final PasswordEncoder passwordEncoder;
 
+    private final OpenaiService openaiService;
+
     public ProductDto addProduct(ProductDto productDto) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         productDto.setSeller((Seller) userRepository.findByUsername(authentication.getName()).get());
-        var product = productRepository.save(Product.fromDto(productDto));
+        var product = Product.fromDto(productDto);
+        product.setDescription(openaiService.requestDescription(product.getName()));
+        product = productRepository.save(product);
         return ProductDto.fromProduct(product);
     }
 
