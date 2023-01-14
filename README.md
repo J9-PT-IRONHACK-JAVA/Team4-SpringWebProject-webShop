@@ -1,12 +1,17 @@
-# SpringShopWeb :leaves:
+# SpringWebShop :leaves:
+![Fruits](/images/logo.png)
 
-SpringShopWeb is a full API REST to manage an Online Shop for Clients and Sellers with CRUD endpoints.
 
-In SpringShopWeb Sellers can add Products only with name and the description is auto-generated with ChatbotGPT. 
+
+SpringWebShop is a full API REST to manage an Online Shop for Clients and Sellers with CRUD endpoints.
+
+In SpringWebShop Sellers can add Products only with name and the description is auto-generated with ChatbotGPT. 
 
 The default language is ENGLISH, but the Clients can register in their own language and the TranslateService (Deepl Api Translator) make an auto-translate for their own language.
 
-The API is full backend working, but for a more user-friendly, the users can register from a little front-end by accessing the following link in web explorer ' http://localhost:8080 '
+The API is full backend working, but for a more user-friendly, the users can register from a little front-end by accessing the following link in web explorer ``http://localhost:8080``
+
+![Index View](/images/indexview.jpg)
 
 :construction: The Payment and Shipment Tracking Services are not implemented for this version.
 
@@ -21,7 +26,8 @@ The API is full backend working, but for a more user-friendly, the users can reg
 
 ## Configuration:
 
-- Database Name:
+- Set your username and password for DB in file ``application.yaml``
+- Mysql Database Name:
   - j9_shopweb
 
 ## Endpoints Documentation:
@@ -58,6 +64,10 @@ The API is full backend working, but for a more user-friendly, the users can reg
 - **#12**  Delete product. Variable : id (id of product)
 - **#13**  View all Headers.
 - **#14**  Create admin users. RequestBody: USER
+
+## Tests:
+
+- For this version, the tests were made for endpoints.
 
 
 ## Developers:
