@@ -1,5 +1,5 @@
-# SpringWebShop ![Fruits](/images/logo.png)
-
+# SpringWebShop :leaves:
+![Fruits](/images/logo.png)
 
 
 
