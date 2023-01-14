@@ -1,5 +1,6 @@
 package com.ironhack.shopweb.advice;
 
+import com.ironhack.shopweb.exception.NoAuthorizationException;
 import com.ironhack.shopweb.exception.ProductNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
@@ -22,6 +23,11 @@ public class ControllerAdvice {
 
 
     // TODO: Ver la siguiente exceptionHandler
+    @ExceptionHandler(NoAuthorizationException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public String noAuthHandler(NoAuthorizationException ex){
+        return ex.getMessage();
+    }
 
 
     @ExceptionHandler(WebExchangeBindException.class)
