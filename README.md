@@ -2,10 +2,13 @@
 
 SpringShopWeb is a full API REST to manage an Online Shop for Clients and Sellers with CRUD endpoints.
 
-In SpringShopWeb Sellers can add Products only with name and the description is auto-generated. 
-The default language is ENGLISH, but the Clients can register in their own language and the TranslateService make an auto-translate for the Client language.
+In SpringShopWeb Sellers can add Products only with name and the description is auto-generated with ChatbotGPT. 
 
-The Payment Service is not implemented for this production version.
+The default language is ENGLISH, but the Clients can register in their own language and the TranslateService (Deepl Api Translator) make an auto-translate for their own language.
+
+The API is full backend working, but for a more user-friendly, the users can register from a little front-end by accessing the following link in web explorer ' http://localhost:8080 '
+
+:construction: The Payment and Shipment Tracking Services are not implemented for this version.
 
 ## Technologies & Requirements :octocat:
 
@@ -23,49 +26,47 @@ The Payment Service is not implemented for this production version.
 
 ## Endpoints Documentation:
 
-| Method |                         Uri                         |   Role |
-|--------|:---------------------------------------------------:|-------:|
-| POST   |            localhost:8080/registerclient            |   None |
-| POST   |            localhost:8080/registerseller            |   None |
-| POST   |          localhost:8080/seller/addproduct           | SELLER |
-| GET    |       localhost:8080/client/viewproduct/{id}        | CLIENT |
-| GET    |          localhost:8080/client/allproducts          | CLIENT |
-| PATCH  |       localhost:8080/client/update?**PARAMS**       | CLIENT |
-| PUT    |        localhost:8080/client/addtocart/{id}         | CLIENT |
-| GET    |             localhost:8080/client/cart              | CLIENT |
-| PUT    |           localhost:8080/client/checkout            | CLIENT |
-| GET    |            localhost:8080/client/orders             | CLIENT |
-| PATCH  | localhost:8080/seller/updateproduct/{id}?**PARAMS** | SELLER |
-| DELETE |          localhost:8080/seller/delete/{id}          | SELLER |
-| GET    |               localhost:8080/headers                |  ADMIN |
+| #   | Method |                         Uri                         |   Role |
+|-----|--------|:---------------------------------------------------:|-------:|
+| #1  | POST   |            localhost:8080/registerclient            |   None |
+| #2  | POST   |            localhost:8080/registerseller            |   None |
+| #3  | POST   |          localhost:8080/seller/addproduct           | SELLER |
+| #4  | GET    |       localhost:8080/client/viewproduct/{id}        | CLIENT |
+| #5  | GET    |          localhost:8080/client/allproducts          | CLIENT |
+| #6  | PATCH  |       localhost:8080/client/update?**PARAMS**       | CLIENT |
+| #7  | PUT    |        localhost:8080/client/addtocart/{id}         | CLIENT |
+| #8  | GET    |             localhost:8080/client/cart              | CLIENT |
+| #9  | PUT    |           localhost:8080/client/checkout            | CLIENT |
+| #10 | GET    |            localhost:8080/client/orders             | CLIENT |
+| #11 | PATCH  | localhost:8080/seller/updateproduct/{id}?**PARAMS** | SELLER |
+| #12 | DELETE |          localhost:8080/seller/delete/{id}          | SELLER |
+| #13 | GET    |               localhost:8080/headers                |  ADMIN |
+| #14 | POST   |                localhost:8080/users                 |  ADMIN |
+
+**Actions:**
+- **#1**  Register USERS. RequestBody: CLIENT | RequestHeaders: user-agent for take the registration platform.
+- **#2**  Register SELLERS. RequestBody: SELLER | RequestHeaders: user-agent for take the registration platform.
+- **#3**  Add product to database. RequestBody: PRODUCTDTO.
+- **#4**  View specific product information. PathVariable: id of product.
+- **#5**  View list of all products with information, from all sellers.
+- **#6**  Update seller information. Optional Params: name, address, email, phone, password, language.
+- **#7**  Add to cart one product. Variable : id (id of product)
+- **#8**  View all products in the Cart. 
+- **#9**  Make the checkout of Cart. Cart put empty and create a new Order with random OrderId.
+- **#10**  View all client orders.
+- **#11**  Update product information. Optional Params: name, description, ean, price, stock.
+- **#12**  Delete product. Variable : id (id of product)
+- **#13**  View all Headers.
+- **#14**  Create admin users. RequestBody: USER
 
 
+## Developers:
 
+- Alfred -> (<a href="https://github.com/ainga-ri">GitHub Profile</a>)
+- Andres -> (<a href="https://github.com/o-andres-m">GitHub Profile</a>)
+- Ivan -> (<a href="https://github.com/IvanAmoros">GitHub Profile</a>)
 
-Requirements
+## Canva Presentation:
 
-1) FREE THEME you can pick something that you like and build the project around it
+- <a href="https://www.canva.com/design/DAFXoCunSSw/34rhWJenFkZxX-ZHz_HO-A/view?utm_content=DAFXoCunSSw&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink">Canva Presentation</a>
 
-2) REAL api with a real use case
-
-3) API ( at least 5 "root" endpoints, you must find use for: PathVariable, RequestParam, RequestBody, RequestHeader)
-
-4) CRUD ( you must use all verbs we have seen so far: GET,POST,PUT,UPDATE,DELETE)
-
-5) DTOs ( no entity should be passed from our controllers, you will use DTOs)
-
-6) EXTERNAL api call( calls to at least 2 externals APIs using OpenFeign)
-
-7) DB persistence( at least 4 entities, you must find use for inheritance)
-
-8) SECURED endpoints ( at least two roles: USER, ADMIN)
-
-9) TESTs ( at least 80% code coverage, tests must be robust)
-
-10) VALIDATIONS ( object you receive must be correctly validated)
-
-11) EXCEPTIONS ( all errors and exceptions must be dealt with)
-
-12) Complete documentation of the app, the api, its use and the endpoints
-
-13) A presentation with all the team involved
