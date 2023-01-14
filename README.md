@@ -1,5 +1,47 @@
 # SpringShopWeb :leaves:
 
+SpringShopWeb is a full API REST to manage an Online Shop for Clients and Sellers with CRUD endpoints.
+
+In SpringShopWeb Sellers can add Products only with name and the description is auto-generated. 
+The default language is ENGLISH, but the Clients can register in their own language and the TranslateService make an auto-translate for the Client language.
+
+The Payment Service is not implemented for this production version.
+
+## Technologies & Requirements :octocat:
+
+- Java 17
+- SpringBoot 3.0.1
+- MySql
+- External Apis:
+  - DeeplWebTranslator (<a href="https://www.deepl.com/docs-api">Deepl Web Api Docs</a>)
+  - OpenAI ChatbotGPT (<a href="https://beta.openai.com/docs/introduction">OpenAI Chatbot Api Docs</a>)
+
+## Configuration:
+
+- Database Name:
+  - j9_shopweb
+
+## Endpoints Documentation:
+
+| Method |                         Uri                         |   Role |
+|--------|:---------------------------------------------------:|-------:|
+| POST   |            localhost:8080/registerclient            |   None |
+| POST   |            localhost:8080/registerseller            |   None |
+| POST   |          localhost:8080/seller/addproduct           | SELLER |
+| GET    |       localhost:8080/client/viewproduct/{id}        | CLIENT |
+| GET    |          localhost:8080/client/allproducts          | CLIENT |
+| PATCH  |       localhost:8080/client/update?**PARAMS**       | CLIENT |
+| PUT    |        localhost:8080/client/addtocart/{id}         | CLIENT |
+| GET    |             localhost:8080/client/cart              | CLIENT |
+| PUT    |           localhost:8080/client/checkout            | CLIENT |
+| GET    |            localhost:8080/client/orders             | CLIENT |
+| PATCH  | localhost:8080/seller/updateproduct/{id}?**PARAMS** | SELLER |
+| DELETE |          localhost:8080/seller/delete/{id}          | SELLER |
+| GET    |               localhost:8080/headers                |  ADMIN |
+
+
+
+
 Requirements
 
 1) FREE THEME you can pick something that you like and build the project around it

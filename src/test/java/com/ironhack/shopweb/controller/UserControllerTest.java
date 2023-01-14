@@ -29,7 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 @SpringBootTest
-@WithMockUser(username = "admin", password = "admin",roles = {"ADMIN"})
+//@WithMockUser(username = "admin", password = "admin",roles = {"ADMIN"})
 @AutoConfigureMockMvc
 class UserControllerTest {
 
@@ -103,5 +103,20 @@ class UserControllerTest {
                 .andDo(print())
                 .andExpect(status().isCreated())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.companyName").value("Company Name Seller 1"));
+    }
+    @Test
+    public void test_create_general_user_without_admin() throws Exception {
+        var userToCreate = new UserDto("usertest","testpass");
+
+        var userCreated =  new User("usertest","testpass","ROLE_ADMIN");
+
+        when(userService.createUser(userToCreate)).thenReturn(userCreated);
+
+        mockMvc.perform(post("/user")
+                        .header("User-Agent","Test")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(om.writeValueAsString(userToCreate)))
+                .andDo(print())
+                .andExpect(status().isUnauthorized());
     }
 }

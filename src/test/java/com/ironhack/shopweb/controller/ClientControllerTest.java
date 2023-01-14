@@ -30,7 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 @SpringBootTest
-@WithMockUser(username = "client", password = "client",roles = {"CLIENT"})
+//@WithMockUser(username = "client", password = "client",roles = {"CLIENT"})
 @AutoConfigureMockMvc
 class ClientControllerTest {
 
@@ -96,7 +96,7 @@ class ClientControllerTest {
         finalClientDto.setEmail(newEmail);
 
         when(clientService.updateData(Optional.empty(), Optional.empty(),Optional.of("newmail@client.com"),
-                "+66554433".describeConstable(), Optional.empty(), Optional.empty())).thenReturn(finalClientDto);
+                Optional.of("+66554433"), Optional.empty(), Optional.empty())).thenReturn(finalClientDto);
 
         mockMvc.perform(patch("/client/update")
                         .param("email",newEmail)
@@ -196,6 +196,22 @@ class ClientControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.[*]",hasSize(4)));
+    }
+
+    @Test
+    public void test_no_auth() throws Exception {
+        var listOfProductsDto = List.of(
+                new ProductDto(),
+                new ProductDto(),
+                new ProductDto(),
+                new ProductDto()
+        );
+        when(productService.findAllProducts()).thenReturn(listOfProductsDto);
+
+        mockMvc.perform(get("/client/allproducts")
+                    .with(httpBasic("client","badPassword")))
+                .andDo(print())
+                .andExpect(status().isUnauthorized());
     }
 
 }
