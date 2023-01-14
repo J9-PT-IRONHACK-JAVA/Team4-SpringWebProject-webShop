@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Welcome to SpringWebShop!</title>
+  <title>USER REGISTERED</title>
   <style>
     body {
       align-items: center;
@@ -136,13 +136,15 @@
 <body>
 
 <div class="form">
-  <div class="title">Welcome To SpringWebShop!</div>
+  <div class="title">USER REGISTERED</div>
   <br>
-  <div class="subtitle">Select type of Account to Register:</div>
+  <div class="subtitle">Select Option:</div>
 
 
   <button id="client" type="text" class="submit">Register Client</button>
   <button id="seller" type="text" class="submit">Register Seller</button>
+  <button id="index" type="text" class="submit">Back to Home</button>
+
 
 </div>
 
@@ -153,6 +155,9 @@
   };
   document.getElementById("seller").onclick = function () {
     location.href = "newseller.html";
+  };
+  document.getElementById("index").onclick = function () {
+    location.href = "index.html";
   };
 </script>
 </html>
