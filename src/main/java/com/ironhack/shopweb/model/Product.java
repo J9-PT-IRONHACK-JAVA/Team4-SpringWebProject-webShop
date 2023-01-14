@@ -43,6 +43,22 @@ public class Product {
     @JsonIgnore
     private List<Order> orderList;
 
+    public Product(String name, String ean, String description,BigDecimal price, Long stock) {
+        this.name = name;
+        this.ean = ean;
+        this.description = description;
+        this.price = price;
+        this.stock = stock;
+    }
+
+    public Product(Long id, String name, String description, String ean, BigDecimal price, Long stock) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.ean = ean;
+        this.price = price;
+        this.stock = stock;
+    }
 
     public static Product fromDto(ProductDto productDto){
         var product = new Product();
@@ -54,5 +70,4 @@ public class Product {
         product.setSeller(productDto.getSeller());
         return product;
     }
-
 }

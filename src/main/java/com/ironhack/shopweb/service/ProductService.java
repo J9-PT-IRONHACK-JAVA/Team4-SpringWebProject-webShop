@@ -5,7 +5,6 @@ import com.ironhack.shopweb.dto.ProductDto;
 import com.ironhack.shopweb.exception.ProductNotFoundException;
 import com.ironhack.shopweb.model.Client;
 import com.ironhack.shopweb.model.Product;
-import com.ironhack.shopweb.proxy.TranslateProxy;
 import com.ironhack.shopweb.repository.ProductRepository;
 import com.ironhack.shopweb.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -39,7 +38,6 @@ public class ProductService {
         return listOfProductsDto;
     }
 
-
     public Optional<ProductDto> viewProduct(Long id) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         var client = (Client) userRepository.findByUsername(authentication.getName()).get();
@@ -51,6 +49,5 @@ public class ProductService {
         }
         else throw new ProductNotFoundException(id);
     }
-
 }
 

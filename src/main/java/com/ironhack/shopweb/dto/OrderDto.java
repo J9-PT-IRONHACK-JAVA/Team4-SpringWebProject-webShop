@@ -5,7 +5,6 @@ import com.ironhack.shopweb.model.Client;
 import com.ironhack.shopweb.model.Order;
 import com.ironhack.shopweb.model.Product;
 import com.ironhack.shopweb.model.Status;
-import jakarta.persistence.*;
 import lombok.Data;
 
 import java.math.BigDecimal;

@@ -1,7 +1,6 @@
 package com.ironhack.shopweb.service;
 
 import com.ironhack.shopweb.dto.ProductDto;
-import com.ironhack.shopweb.dto.SellerDto;
 import com.ironhack.shopweb.exception.NoAuthorizationException;
 import com.ironhack.shopweb.exception.ProductNotFoundException;
 import com.ironhack.shopweb.model.Product;
@@ -9,6 +8,7 @@ import com.ironhack.shopweb.model.Seller;
 import com.ironhack.shopweb.repository.ProductRepository;
 import com.ironhack.shopweb.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.aspectj.apache.bcel.classfile.Module;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,20 +21,20 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class SellerService {
 
-
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
 
     private final PasswordEncoder passwordEncoder;
 
-
+    private final OpenaiService openaiService;
 
     public ProductDto addProduct(ProductDto productDto) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         productDto.setSeller((Seller) userRepository.findByUsername(authentication.getName()).get());
-        var product = productRepository.save(Product.fromDto(productDto));
+        var product = Product.fromDto(productDto);
+        product.setDescription(openaiService.requestDescription(product.getName()));
+        product = productRepository.save(product);
         return ProductDto.fromProduct(product);
-
     }
 
     public ProductDto updateProduct(Long id, Optional<String> name, Optional<String> description, Optional<String> ean, Optional<BigDecimal> price, Optional<Long> stock) {

@@ -11,7 +11,5 @@ spring:
   profiles:
     active: load-data
 
-
-
 server:
   port: 8080

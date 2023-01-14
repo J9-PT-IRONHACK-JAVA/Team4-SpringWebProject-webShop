@@ -14,7 +14,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ClientController {
 
-
     private final ClientService clientService;
     private final ProductService productService;
 

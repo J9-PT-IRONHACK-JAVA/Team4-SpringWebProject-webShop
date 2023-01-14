@@ -34,7 +34,6 @@ public class SellerDto {
     @NotBlank (message = "Phone cannot be blank")
     private String phone;
 
-    //TODO: Ver si queremos que este la lista de productos en el vendedor
     @JsonIgnore
     private List<Product> productList;
 
